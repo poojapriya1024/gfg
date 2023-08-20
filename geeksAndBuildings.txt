@@ -1,0 +1,27 @@
+class Solution{
+public:
+    long long calculateXOR(long long a, long long b) {
+        return a ^ b;
+    }
+    
+    long long maximum_energy(int n, vector<int>& heights) {
+        long long maxEnergy = 0;
+        
+        for (int i = 0; i < n; i++) {
+            long long curEnergy = 0;
+            long long curHeight = heights[i];
+            
+            for (int j = i + 1; j < n; j++) {
+                if (heights[j] > curHeight) {
+                    curEnergy = calculateXOR(curEnergy, curHeight);
+                    curHeight = heights[j];
+                }
+            }
+            
+            curEnergy = calculateXOR(curEnergy, curHeight);
+            maxEnergy = max(maxEnergy, curEnergy);
+        }
+        
+        return maxEnergy;
+    }
+};

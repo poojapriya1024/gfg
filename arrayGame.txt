@@ -1,0 +1,35 @@
+class Solution{
+    public:
+    int min_operations(int n, vector<int>&arr, vector<int>&brr) {
+	    // code here
+	    //approach: make the two arrays similar and then we can destory both the arrays
+	    int count = 0;
+	    while(!arr.empty() && !brr.empty())
+	    {
+	        if(arr[0] == brr[0])
+	        {
+	            arr.erase(arr.begin());
+	            brr.erase(brr.begin());
+	            count++; //increase the number of operations
+	        }
+	        
+	        else
+	        {   
+	            //distance required to move the element to the front
+	            int dist1 = find(arr.begin(), arr.end(), brr[0]) - arr.begin();
+	            //distance required to move the element to the back
+	            int dist2 = arr.end() - find(arr.begin(), arr.end(), brr[0]);
+	            
+	            //find the minimum distance for minimum rotation
+	            int minRotations = min(dist1, dist2);
+	            
+	            // now rotate the array arr
+	            rotate(arr.begin(), arr.begin() + minRotations , arr.end());
+	            
+	            count += minRotations;
+	        }
+	    }
+	    
+	    return count;
+    }
+};
