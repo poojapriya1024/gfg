@@ -22,13 +22,11 @@ Node* deleteNode(Node *head,int x)
         return head;
         
     }
-    
-    // else, find the node just before the node to be deleted 
-    
+        
     int count = 1; // this represents the index of the current node
-    
     Node* curr = head;
-    
+
+    // else, find the node just before the node to be deleted
     while(curr != NULL && count < x - 1)
     {
         curr = curr->next;
